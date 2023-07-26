@@ -1,6 +1,6 @@
 {
   "name": "react-native-call-detection",
-  "version": "1.9.0",
+  "version": "1.9.1",
   "description": "https://github.com/scizers/rn-call-detection",
   "main": "index.js",
   "types": "index.d.ts",
