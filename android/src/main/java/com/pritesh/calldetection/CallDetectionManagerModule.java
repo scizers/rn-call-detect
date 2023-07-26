@@ -18,6 +18,7 @@ import androidx.core.content.ContextCompat;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
+import com.facebook.react.bridge.Callback;
 import android.media.AudioManager;
 import java.util.HashMap;
 import java.util.Map;
@@ -56,7 +57,7 @@ public class CallDetectionManagerModule
         telephonyManager = (TelephonyManager) this.reactContext.getSystemService(
                 Context.TELEPHONY_SERVICE);
         callDetectionPhoneStateListener = new CallDetectionPhoneStateListener(this);
-        
+
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.S) {
             if (reactContext.checkSelfPermission(Manifest.permission.READ_PHONE_STATE) == PackageManager.PERMISSION_GRANTED) {
                 telephonyManager.registerTelephonyCallback(ContextCompat.getMainExecutor(reactContext), callStateListener);
