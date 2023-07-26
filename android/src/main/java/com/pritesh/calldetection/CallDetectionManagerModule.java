@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyCallback;
 import android.telephony.TelephonyManager;
+import android.media.AudioManager;
 import android.util.Log;
 
 import androidx.annotation.RequiresApi;
@@ -17,8 +18,7 @@ import androidx.core.content.ContextCompat;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
-import com.facebook.react.bridge.Callback;
-
+import android.media.AudioManager;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,6 +31,7 @@ public class CallDetectionManagerModule
     private boolean wasAppInRinging = false;
     private ReactApplicationContext reactContext;
     private TelephonyManager telephonyManager;
+    private AudioManager myAudioManager = null;
     private CallStateUpdateActionModule jsModule = null;
     private CallDetectionPhoneStateListener callDetectionPhoneStateListener;
     private Activity activity = null;
@@ -96,12 +97,12 @@ public class CallDetectionManagerModule
         telephonyManager = null;
     }
 
-
     @ReactMethod
     public void checkPhoneState(Callback callBack) {
-        callBack.invoke("ishaan sharma");
-    }
+        myAudioManager = (AudioManager) this.reactContext.getSystemService(Context.AUDIO_SERVICE);
+        callBack.invoke(myAudioManager.getMode() == AudioManager.MODE_IN_CALL);
 
+    }
 
     /**
      * @return a map of constants this module exports to JS. Supports JSON types.
@@ -183,5 +184,4 @@ public class CallDetectionManagerModule
                 break;
         }
     }
-
 }
