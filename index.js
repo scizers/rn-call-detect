@@ -64,6 +64,17 @@ class CallDetectorManager {
     }
   }
 
+  checkPhoneState (cb) {
+    if (cb == undefined) {
+      cb = () => {
+
+      }
+    }
+    if (NativeCallDetectorAndroid) {
+      NativeCallDetectorAndroid.checkPhoneState(cb)
+    }
+  }
+
   dispose () {
     NativeCallDetector && NativeCallDetector.stopListener()
     NativeCallDetectorAndroid && NativeCallDetectorAndroid.stopListener()
