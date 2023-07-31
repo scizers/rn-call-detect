@@ -53,6 +53,15 @@ RCT_EXPORT_METHOD(stopListener) {
     [self endBackgroundUpdateTask];
 }
 
+RCT_EXPORT_METHOD(checkPhoneState:(NSString *)title location:(NSString *)location callback: (RCTResponseSenderBlock)callback)
+{
+    CXCallObserver *ctCallCenter = [[CXCallObserver alloc] init];
+//    ctCallCenter.calls
+    callback(@[ctCallCenter.calls]);
+//    callback(@[@(false)]);
+}
+
+
 - (void) beginBackgroundUpdateTask
 {
     self._backgroundUpdateTask = [[UIApplication sharedApplication] beginBackgroundTaskWithExpirationHandler:^{
